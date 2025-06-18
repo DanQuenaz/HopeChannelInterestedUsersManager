@@ -1,0 +1,27 @@
+
+<mat-toolbar>
+  <button mat-icon-button (click)="format('bold')" aria-label="Bold">
+    <mat-icon>format_bold</mat-icon>
+  </button>
+  <button mat-icon-button (click)="format('italic')" aria-label="Italic">
+    <mat-icon>format_italic</mat-icon>
+  </button>
+</mat-toolbar>
+
+<div
+  #editorRef
+  class="editor"
+  contenteditable="true"
+  (mouseup)="saveSelection()"
+  (keyup)="saveSelection()"
+></div>
+
+<mat-toolbar>
+  <button mat-icon-button (click)="sendMessage()" aria-label="Send">
+    <mat-icon>send</mat-icon>
+  </button>
+  <button mat-icon-button (click)="clearEditor()" aria-label="Clear">
+    <mat-icon>clear</mat-icon>
+  </button>
+</mat-toolbar>
+

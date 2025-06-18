@@ -1,0 +1,110 @@
+<div class="table-container">
+  <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <!-- Checkbox Column -->
+    <ng-container matColumnDef="select">
+      <mat-header-cell *matHeaderCellDef>
+        <mat-checkbox (change)="toggleAllSelection()" [checked]="isAllSelected()"></mat-checkbox>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let person">
+        <mat-checkbox [(ngModel)]="person.selected"></mat-checkbox>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
+      <mat-cell *matCellDef="let person"> {{person.name}} </mat-cell>
+    </ng-container>
+
+    <!-- Address Column -->
+    <ng-container matColumnDef="address">
+      <mat-header-cell *matHeaderCellDef> Endereço </mat-header-cell>
+      <mat-cell *matCellDef="let person"> {{person.address}} </mat-cell>
+    </ng-container>
+
+    <!-- Phone Column -->
+    <ng-container matColumnDef="phoneNumber">
+      <mat-header-cell *matHeaderCellDef> Telefone </mat-header-cell>
+      <mat-cell *matCellDef="let person"> {{person.phoneNumber}} </mat-cell>
+    </ng-container>
+
+    <!-- Phone Column -->
+    <ng-container matColumnDef="phoneNumberFormated">
+      <mat-header-cell *matHeaderCellDef> Whatsapp </mat-header-cell>
+      <ng-container *matCellDef="let person">
+        <mat-cell 
+          *ngIf="person.id !== rowIdEdit"
+          (click)="enableWhatsappNumberEdit(person)"
+        >
+          {{person.formattedPhoneNumber}} 
+        </mat-cell>
+        <mat-cell *ngIf="enableEdit && person.id === rowIdEdit">
+          <input
+            type="text"
+            [(ngModel)]="person.formattedPhoneNumber"
+            (blur)="disableWhatsappNumberEdit(person)"
+            (keyup.enter)="disableWhatsappNumberEdit(person)"
+            placeholder="Enter WhatsApp number" />
+        </mat-cell>
+      </ng-container>
+    </ng-container>
+
+    <!-- Course Ordered Column -->
+    <ng-container matColumnDef="courseOrdered">
+      <mat-header-cell *matHeaderCellDef> Material solicitado </mat-header-cell>
+      <mat-cell *matCellDef="let person"> {{person.courseOrdered}} </mat-cell>
+    </ng-container>
+
+    <!-- Order Date Column -->
+    <ng-container matColumnDef="orderDate">
+      <mat-header-cell *matHeaderCellDef> Data solicitação </mat-header-cell>
+      <mat-cell *matCellDef="let person"> {{person.orderDate | date}} </mat-cell>
+    </ng-container>
+
+    <!-- Status Column -->
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+      <mat-cell *matCellDef="let person">
+        <mat-form-field appearance="fill" class="status-dropdown">
+          <mat-select [(ngModel)]="person.status" (selectionChange)="onStatusChange(person)">
+            <mat-option *ngFor="let status of statusOptions" [value]="status">
+              {{status}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Respponsible Column -->
+    <ng-container matColumnDef="responsible">
+      <mat-header-cell *matHeaderCellDef> Responsável </mat-header-cell>
+      <mat-cell *matCellDef="let person"> {{person.responsible}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <div *ngIf="isLoading" class="spinner-container">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <div class="button-group">
+    <button mat-raised-button color="primary" (click)="sendMessageToSelected()">
+      Send message to selected
+    </button>
+    <button mat-raised-button color="accent" (click)="sendMessageToAll()">
+      Send message for all
+    </button>
+    <div class="file-upload">
+      <input type="file" accept=".xlsx" (change)="onFileSelected($event)" style="display: none;" #fileInput>
+      <button mat-raised-button color="warn" (click)="fileInput.click()">
+        Choose File
+      </button>
+      <span *ngIf="selectedFile" class="file-name">{{selectedFile.name}}</span>
+      <button mat-raised-button color="primary" (click)="uploadFile()" [disabled]="!selectedFile">
+        Update Data
+      </button>
+    </div>
+  </div>
+</div>
