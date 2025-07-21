@@ -1,0 +1,85 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: quenaz
+      changes:
+        - createTable:
+            tableName: responsible
+            columns:
+              - column:
+                  name: id
+                  type: INT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: phone_number
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: formatted_phone_number
+                  type: VARCHAR(50)
+
+  - changeSet:
+      id: 2
+      author: quenaz
+      changes:
+        - createTable:
+            tableName: interested_person
+            columns:
+              - column:
+                  name: id
+                  type: INT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: reference_id
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: phone_number
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: formatted_phone_number
+                  type: VARCHAR(50)
+              - column:
+                  name: course_ordered
+                  type: VARCHAR(255)
+              - column:
+                  name: order_date
+                  type: DATE
+              - column:
+                  name: address
+                  type: VARCHAR(255)
+              - column:
+                  name: status
+                  type: VARCHAR(50)
+              - column:
+                  name: last_status_update
+                  type: DATE
+              - column:
+                  name: responsible_id
+                  type: INT
+        - addForeignKeyConstraint:
+            baseTableName: interested_person
+            baseColumnNames: responsible_id
+            referencedTableName: responsible
+            referencedColumnNames: id
+            constraintName: fk_interested_person_responsible

@@ -7,7 +7,7 @@ import { Person } from '../models/person';
   providedIn: 'root'
 })
 export class PeopleService {
-  private apiUrl = 'http://localhost:5000/interested-person';
+  private apiUrl = 'http://localhost:8080/interested-person';
 
   constructor(private http: HttpClient) { }
 

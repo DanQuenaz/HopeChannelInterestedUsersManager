@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: evangelism-assistant
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/master
+    username: root
+    password: evangelism_assistant_123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+
+  liquibase:
+    change-log: classpath:/db/changelog/database-changelog.yml
+
+# Optional: server settings
+server:
+  port: 8080
