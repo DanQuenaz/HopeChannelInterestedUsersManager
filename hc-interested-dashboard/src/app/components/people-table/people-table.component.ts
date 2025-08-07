@@ -81,9 +81,8 @@ export class PeopleTableComponent implements OnInit {
 
   sendMessageToAll(): void {
     const messageDialog = this.dialog.open(MessageEditorComponent, {
-      width: '80vw',
-      maxWidth: '100%',
-      maxHeight: '70vh',
+      width: '60vw',
+      height: '50vh',
       panelClass: 'full-screen-dialog',
       data: {}
     });

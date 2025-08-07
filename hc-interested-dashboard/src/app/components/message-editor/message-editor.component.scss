@@ -1,7 +1,44 @@
-.editor {
+.editor-container {
+  max-width: 100%;
+  height: 100%;
+}
+
+.editor-toolbar {
+  border-radius: 4px 4px 0 0;
+}
+
+.editor-card {
+  border-radius: 0 0 4px 4px;
+}
+
+.editor-content {
+  min-height: 29vh;
+  width: 97%;
+  padding: 16px;
+  outline: none;
   border: 1px solid #ccc;
-  padding: 10px;
-  min-height: 120px;
-  margin-top: 10px;
   border-radius: 4px;
+  font-family: inherit;
+  font-size: inherit;
+  
+  &:empty::before {
+    content: attr(placeholder);
+    color: #999;
+  }
+}
+
+button.active {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.emoji-container {
+  position: relative; 
+}
+
+.emoji-mart-floating {
+  position: absolute;
+  left: 150px;
+  top: -50px;
+  z-index: 9999;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }

@@ -1,27 +1,50 @@
+<div class="editor-container">
+  <mat-toolbar color="primary" class="editor-toolbar">
+    <button mat-icon-button (click)="execCommand('bold')" matTooltip="Negrito">
+      <mat-icon>format_bold</mat-icon>
+    </button>
+    <button mat-icon-button (click)="execCommand('italic')" matTooltip="Itálico">
+      <mat-icon>format_italic</mat-icon>
+    </button>
+    <button mat-icon-button (click)="execCommand('transformList')" matTooltip="Lista">
+      <mat-icon>format_list_bulleted</mat-icon>
+    </button>
+    <button mat-icon-button (click)="toggleEmojiPicker()" matTooltip="Adicionar reação">
+      <mat-icon>add_reaction</mat-icon>
+    </button>
+  </mat-toolbar>
 
-<mat-toolbar>
-  <button mat-icon-button (click)="format('bold')" aria-label="Bold">
-    <mat-icon>format_bold</mat-icon>
-  </button>
-  <button mat-icon-button (click)="format('italic')" aria-label="Italic">
-    <mat-icon>format_italic</mat-icon>
-  </button>
-</mat-toolbar>
+  <div class="emoji-container">
+    <emoji-mart
+      class="emoji-mart emoji-mart-floating"
+      [set]="set"
+      *ngIf="showEmojiPicker"
+      (emojiSelect)="addEmoji($event)"
+      title="Pick your emoji…">
+    </emoji-mart>
+  </div>
 
-<div
-  #editorRef
-  class="editor"
-  contenteditable="true"
-  (mouseup)="saveSelection()"
-  (keyup)="saveSelection()"
-></div>
+  <mat-card class="editor-card">
+    <mat-card-content>
+      <div 
+        id="editor"
+        contenteditable="true"
+        class="editor-content"
+        placeholder="Type your text here..."
+        [(ngModel)] = "content"
+      ></div>
+    </mat-card-content>
+  </mat-card>
 
-<mat-toolbar>
-  <button mat-icon-button (click)="sendMessage()" aria-label="Send">
-    <mat-icon>send</mat-icon>
-  </button>
-  <button mat-icon-button (click)="clearEditor()" aria-label="Clear">
-    <mat-icon>clear</mat-icon>
-  </button>
-</mat-toolbar>
+  <mat-toolbar>
+    <button mat-icon-button (click)="sendMessage()" aria-label="Send">
+      <mat-icon>send</mat-icon>
+    </button>
+    <button mat-icon-button (click)="clearEditor()" aria-label="Clear">
+      <mat-icon>clear</mat-icon>
+    </button>
+  </mat-toolbar>
+</div>
+
+
 

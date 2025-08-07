@@ -14,10 +14,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { PeopleTableComponent } from './components/people-table/people-table.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MessageEditorComponent } from './components/message-editor/message-editor.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatCardModule } from '@angular/material/card';
+import { PickerModule } from '@ctrl/ngx-emoji-mart';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,10 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatSnackBarModule,
     FormsModule,
     MatSelectModule,
-    MatDialogModule
+    MatDialogModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    PickerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

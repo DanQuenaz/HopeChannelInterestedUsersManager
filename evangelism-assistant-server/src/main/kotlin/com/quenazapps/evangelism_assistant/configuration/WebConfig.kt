@@ -1,4 +1,4 @@
-package com.quenazapps.evangelism_assistant.Configuration
+package com.quenazapps.evangelism_assistant.configuration
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
