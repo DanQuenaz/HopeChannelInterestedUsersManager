@@ -1,0 +1,37 @@
+
+<div class="image-picker-container">
+  <!-- Preview -->
+  <div class="preview" *ngIf="previewUrl">
+    <img [src]="previewUrl" alt="Preview" />
+  </div>
+
+  <div class="close-btn">
+    <button type="button" (click)="close()" aria-label="Close">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <button mat-raised-button color="accent" *ngIf="isValidImageUrl()" (click)="useSelectedImage()">
+      <mat-icon>check</mat-icon> Usar esta imagem!
+  </button>
+
+  <div class="input-section">
+    <button mat-raised-button color="primary" (click)="fileInput.click()">
+      <mat-icon>upload</mat-icon> Upload from computer
+    </button>
+    <input
+      type="file"
+      accept="image/*"
+      #fileInput
+      (change)="onFileSelected($event)"
+      hidden
+    />
+
+    <mat-form-field appearance="fill" class="url-field">
+      <mat-label>Image URL</mat-label>
+      <input matInput class="web-url-input" [(ngModel)]="imageUrl" (blur)="onUrlEntered()" placeholder="Web url" />
+    </mat-form-field>
+  </div>
+
+  
+</div>

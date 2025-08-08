@@ -7,24 +7,34 @@
   border-radius: 4px 4px 0 0;
 }
 
-.editor-card {
+.editor-message-body {
+  display: flex;
+  flex-direction: row;
   border-radius: 0 0 4px 4px;
 }
 
-.editor-content {
-  min-height: 29vh;
-  width: 97%;
-  padding: 16px;
+.editor-message{
+  flex-grow: 0.5;
+  width: 100%;
+}
+
+.editor-message-preview{
+  flex-grow: 0.5;
+  width: 100%;
+  max-width: 25lh;
+  min-height: 32vh;
+  padding: 5px;
+  background-color: #f9f9f9;
+}
+
+.message-editor {
+  min-height: 32vh;
+  min-width: 97%;
+  padding: 5px;
   outline: none;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border: none;
   font-family: inherit;
   font-size: inherit;
-  
-  &:empty::before {
-    content: attr(placeholder);
-    color: #999;
-  }
 }
 
 button.active {

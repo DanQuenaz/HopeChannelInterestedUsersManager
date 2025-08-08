@@ -1,40 +1,48 @@
-<div class="editor-container">
+<app-image-picker *ngIf="imagePickerOpen" (messageEvent)="receiveImagePickerMessage($event)"></app-image-picker>
+
+<div *ngIf="!imagePickerOpen" class="editor-container">
   <mat-toolbar color="primary" class="editor-toolbar">
-    <button mat-icon-button (click)="execCommand('bold')" matTooltip="Negrito">
+    <button mat-icon-button (click)="boldCommand(messageContentInput)" matTooltip="Negrito">
       <mat-icon>format_bold</mat-icon>
     </button>
-    <button mat-icon-button (click)="execCommand('italic')" matTooltip="Itálico">
+    <button mat-icon-button (click)="italicCommand(messageContentInput)" matTooltip="Itálico">
       <mat-icon>format_italic</mat-icon>
     </button>
-    <button mat-icon-button (click)="execCommand('transformList')" matTooltip="Lista">
+    <button mat-icon-button (click)="bulletListCommand(messageContentInput)" matTooltip="Lista">
       <mat-icon>format_list_bulleted</mat-icon>
     </button>
     <button mat-icon-button (click)="toggleEmojiPicker()" matTooltip="Adicionar reação">
       <mat-icon>add_reaction</mat-icon>
+    </button>
+    <button mat-icon-button (click)="toggleImagePicker()" matTooltip="Adicionar imagem">
+      <mat-icon>imagesmode</mat-icon>
     </button>
   </mat-toolbar>
 
   <div class="emoji-container">
     <emoji-mart
       class="emoji-mart emoji-mart-floating"
-      [set]="set"
+      [set]="'google'"
       *ngIf="showEmojiPicker"
-      (emojiSelect)="addEmoji($event)"
+      (emojiSelect)="addEmoji($event, messageContentInput)"
+      [isNative]="true"
       title="Pick your emoji…">
     </emoji-mart>
   </div>
 
-  <mat-card class="editor-card">
-    <mat-card-content>
-      <div 
-        id="editor"
-        contenteditable="true"
-        class="editor-content"
-        placeholder="Type your text here..."
-        [(ngModel)] = "content"
-      ></div>
-    </mat-card-content>
-  </mat-card>
+  <div class="editor-message-body">
+    <div class="editor-message">
+      <textarea matInput #messageContentInput
+        class="message-editor"
+        [(ngModel)]="messageData.content"
+        placeholder="Digite sua mensagem..."></textarea> 
+    </div>
+     <div class="editor-message-preview" *ngIf="messageContent">
+      <p class="preview-title">Pré-visualização:</p>
+      <div [innerHTML]="messageContent">
+      </div>
+     </div>
+  </div>
 
   <mat-toolbar>
     <button mat-icon-button (click)="sendMessage()" aria-label="Send">

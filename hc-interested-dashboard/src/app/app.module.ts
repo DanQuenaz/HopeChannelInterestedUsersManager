@@ -20,12 +20,16 @@ import { MessageEditorComponent } from './components/message-editor/message-edit
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
+import { ImagePickerComponent } from './components/image-picker/image-picker.component';
+import { HtmlPreviewPipe } from './pipes/html-preview.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     PeopleTableComponent,
-    MessageEditorComponent
+    MessageEditorComponent,
+    ImagePickerComponent,
+    HtmlPreviewPipe
   ],
   imports: [
     BrowserModule,
